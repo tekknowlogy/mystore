@@ -9,6 +9,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductService } from './shared/product.service';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { FormsModule } from '@angular/forms'; // Importing forms module to this file
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     NavbarComponent,
     ProductItemComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    SearchBoxComponent
   ],
   imports: [
     HttpClientModule,
@@ -24,7 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
       {path: '',                    component: HomeComponent},
       {path: 'products/:productId', component: ProductDetailComponent}
     ]),
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
