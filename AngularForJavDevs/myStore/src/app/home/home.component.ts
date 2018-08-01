@@ -10,17 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  products: Product[]=[];
+  products: Product[];
   query: string;
   constructor(private productService: ProductService, private route: ActivatedRoute) {
   console.log('Called Constructor');
     this.route.queryParams.subscribe(params => {
         this.query = params['query'];
-      alert(this.query);
+        this.updateQuery();
     });
   }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
+    this.updateQuery();
+  }
+  updateQuery() {
+    if (this.query) {
+      this.products = this.productService.getProductsSearch(this.query);
+    } else {
+      this.products = this.productService.getProducts();
+    }
   }
 }

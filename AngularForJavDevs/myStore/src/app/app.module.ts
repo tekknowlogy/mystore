@@ -25,7 +25,8 @@ import { FormsModule } from '@angular/forms'; // Importing forms module to this 
     HttpClientModule,
     RouterModule.forRoot([
       {path: '',                    component: HomeComponent},
-      {path: 'products/:productId', component: ProductDetailComponent}
+      {path: 'products/:productId', component: ProductDetailComponent},
+      {path: ':query', component: HomeComponent}
     ]),
     BrowserModule,
     FormsModule

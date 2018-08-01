@@ -9,11 +9,23 @@ export class ProductService {
 
   // I'm subscribing inside the method to simplify the demo
   // A better solution is to return an observable and subscribe in the component
-  getProducts(): Product[]{
+  getProducts(): Product[] {
 
     const products: Product[] = [];
 
-    this.httpClient.get<Product[]>("/api/products")
+    this.httpClient.get<Product[]>('/api/products')
+      .subscribe(
+        data => products.push(...data),
+        err => console.log(err)
+      );
+
+    return products;
+  }
+  getProductsSearch(key: string): Product[] {
+
+    const products: Product[] = [];
+
+    this.httpClient.get<Product[]>('/api/products/search/' + key)
       .subscribe(
         data => products.push(...data),
         err => console.log(err)
@@ -26,7 +38,7 @@ export class ProductService {
 
     const product: Product = <Product> {};
 
-    this.httpClient.get<Product>(`/api/products/${productId}`)
+    this.httpClient.get<Product>('/api/products/' + productId)
       .subscribe(
         data => Object.assign(product, data),
         err => console.log(err)

@@ -1,7 +1,11 @@
 package com.yfain.controller;
 
+import java.util.Arrays;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import com.sun.xml.internal.ws.util.StringUtils;
 
 @RestController
 @RequestMapping("/api")
@@ -61,4 +65,11 @@ public class ProductController {
 
         return products;
     }
+    
+    @RequestMapping(value="products/search/{key}",
+            method = RequestMethod.GET,
+            produces= MediaType.APPLICATION_JSON_VALUE)
+    public Product[] searchProducts(@PathVariable("key") String key){
+		return Arrays.asList(products).stream().filter(p->(p.description.contains(key) || p.title.contains(key))).toArray(Product[]::new);
+		}
 }
